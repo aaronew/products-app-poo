@@ -7,8 +7,21 @@ class Product {
 };
 
 class UI {
-  addProduct() {
+  addProduct(product) {
+    const productList = document.getElementById('product-list');
+    const element = document.createElement('div');
 
+    element.innerHTML = `
+      <div class="card text-center mb-4">
+        <div class="card-body">
+          <strong>Product</strong>: ${product.name}
+          <strong>Price</strong>: ${product.price}
+          <strong>BarCode</strong>: ${product.barcode}
+        </div>
+      </div>
+    `;
+
+    productList.appendChild(element);
   }
 
   deleteProduct() {
@@ -31,7 +44,9 @@ getProductForm
       price = document.getElementById('price').value,
       barcode = document.getElementById('barcode').value;
 
-      console.log(name, price, barcode);
+    const product = new Product(name, price, barcode);
+    const ui = new UI();
+    ui.addProduct(product);
 
     event.preventDefault();
   });
